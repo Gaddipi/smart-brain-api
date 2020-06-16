@@ -12,10 +12,9 @@ const register = require('./controllers/register');
 const db = knex({
 	client: "pg",
 	connection: {
-		host: "postgresql-amorphous-31183",
-		user: "Ismail",
-		password: "",
-		database: "smart-brain",
+		host: "process.env.DATABASE_URL",
+		ssl: true,
+
 	},
 });
 
