@@ -5,13 +5,7 @@ const handleRegister = (req, res, db, bcrypt) => {
 		return res.status(400).json('incorrect form submission')
 	}
 
-const db = knex({
-	client: "pg",
-	connection: {
-		connectionString: process.env.DATABASE_URL,
-		ssl: true,
-	},
-});
+
 
 
 	const hash = bcrypt.hashSync(password);
