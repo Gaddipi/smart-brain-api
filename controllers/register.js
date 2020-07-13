@@ -34,22 +34,15 @@
 // };
 
 
-const handleRegister = (req, res,bcrypt) => {
+const handleRegister = (req, res, db, bcrypt) => {
 	const { email, name, password } = req.body;
 	if (!email || !name || !password) {
 		return res.status(400).json("incorrect form submission");
 	}
 	const hash = bcrypt.hashSync(password);
-const db = knex({
-	client: "pg",
-	connection: {
-		connectionString: process.env.DATABASE_URL,
-		ssl: true,
-	},
-});
 
 
-
+	
 	db.transaction(trx => {
 		trx.insert({
 				hash: hash,
@@ -70,7 +63,7 @@ const db = knex({
 					});
 			})
 			.then(trx.commit)
-			.catch(trx.rollback);
+			.catch(console.log(err));
 	}).catch((err) => res.status(400).json("unable to register"));
 };
 
