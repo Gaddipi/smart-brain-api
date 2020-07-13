@@ -10,12 +10,12 @@ const image = require('./controllers/image');
 const register = require('./controllers/register');
 
 const db = knex({
-	client: 'pg',
-	connection:{
-		connectionString: process.env.DATABASE_URL,
-		ssl: true,
-	}
-})
+	client: "pg",
+	connectionString: process.env.DATABASE_URL,
+	ssl: {
+		rejectUnauthorized: false,
+	},
+});
 
 const app = express();
 
