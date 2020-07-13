@@ -48,6 +48,7 @@ const handleRegister = (req, res, db, bcrypt) => {
 				hash: hash,
 				email: email,
 			})
+			console.log(trx)
 			.into("login")
 			.returning("email")
 			.then((loginEmail) => {
